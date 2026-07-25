@@ -1,7 +1,12 @@
 import axios from 'axios';
 
+let baseURL = import.meta.env.VITE_API_URL || '/api';
+if (baseURL !== '/api' && !baseURL.endsWith('/api')) {
+  baseURL = baseURL.replace(/\/+$/, '') + '/api';
+}
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || '/api',
+  baseURL,
   headers: { 'Content-Type': 'application/json' },
 });
 
@@ -17,9 +22,9 @@ api.interceptors.response.use(
     const normalized = {
       success: false,
       status: err.response?.status || 0,
-      code: err.response?.data?.error?.code || 'NETWORK_ERROR',
-      message: err.response?.data?.error?.message || err.message || 'Network error',
-      details: err.response?.data?.error?.details,
+      code: err.response?.data?.code || 'NETWORK_ERROR',
+      message: err.response?.data?.message || err.message || 'Network error',
+      details: err.response?.data?.details,
     };
     if (normalized.status === 401) {
       localStorage.removeItem('wye_token');

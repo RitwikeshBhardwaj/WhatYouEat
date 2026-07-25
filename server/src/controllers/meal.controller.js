@@ -57,8 +57,20 @@ export const updateMeal = async (req, res, next) => {
     if (label) meal.label = label;
     if (portionUnit) meal.portionUnit = portionUnit;
     if (date) meal.date = startOfUTCDay(new Date(date));
-    if (portion !== undefined) meal.portion = portion;
-    if (nutrition) meal.nutrition = scaleNutrition(nutrition, meal.portion);
+    if (portion !== undefined) {
+      if (nutrition) {
+        meal.nutrition = scaleNutrition(nutrition, portion);
+      } else {
+        const perUnit = meal.nutrition;
+        meal.nutrition = scaleNutrition(
+          { calories: perUnit.calories / meal.portion, protein: perUnit.protein / meal.portion, carbs: perUnit.carbs / meal.portion, fat: perUnit.fat / meal.portion },
+          portion
+        );
+      }
+      meal.portion = portion;
+    } else if (nutrition) {
+      meal.nutrition = scaleNutrition(nutrition, meal.portion);
+    }
     await meal.save();
     success(res, { meal });
   } catch (err) {

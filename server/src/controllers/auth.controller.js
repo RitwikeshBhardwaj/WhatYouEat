@@ -1,7 +1,7 @@
 import User from '../models/User.js';
 import { AppError } from '../middleware/error.js';
 import { signToken } from '../middleware/auth.js';
-import { hashPassword, comparePassword } from '../utils/crypto.js';
+import { comparePassword } from '../utils/crypto.js';
 import { sendPasswordResetEmail, sendRecoveryPinEmail } from '../services/email.service.js';
 import { sendOtpSMS } from '../services/sms.service.js';
 import { success } from '../utils/response.js';
@@ -25,8 +25,7 @@ export const signup = async (req, res, next) => {
     if (phone) or.push({ phone });
     const existing = await User.findOne({ $or: or });
     if (existing) throw new AppError('Account already exists with those details', 409, 'DUPLICATE');
-    const hashed = await hashPassword(password);
-    const user = await User.create({ name, email, phone, password: hashed });
+    const user = await User.create({ name, email, phone, password });
 
     if (email) {
       try {
@@ -137,7 +136,7 @@ export const resetPasswordToken = async (req, res, next) => {
       resetPasswordExpires: { $gt: Date.now() },
     }).select('+resetPasswordToken +resetPasswordExpires +password');
     if (!user) throw new AppError('Invalid or expired reset token', 400, 'INVALID_TOKEN');
-    user.password = await hashPassword(password);
+    user.password = password;
     user.clearResetFields();
     await user.save();
     success(res, { message: 'Password updated' });
@@ -159,7 +158,7 @@ export const resetPasswordOtp = async (req, res, next) => {
     if (user.otp !== otp) {
       throw new AppError('Invalid OTP', 400, 'INVALID_OTP');
     }
-    user.password = await hashPassword(password);
+    user.password = password;
     user.clearResetFields();
     await user.save();
     success(res, { message: 'Password updated' });
@@ -175,7 +174,7 @@ export const resetPasswordPin = async (req, res, next) => {
     if (!user || !user.verifyRecoveryPin(pin)) {
       throw new AppError('Invalid recovery PIN', 400, 'INVALID_PIN');
     }
-    user.password = await hashPassword(password);
+    user.password = password;
     await user.save();
     success(res, { message: 'Password updated' });
   } catch (err) {

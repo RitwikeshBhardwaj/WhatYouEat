@@ -45,6 +45,8 @@ export const errorHandler = (err, req, res, next) => {
 
   res.status(statusCode).json({
     success: false,
-    error: { code, message, ...(details ? { details } : {}) },
+    message,
+    ...(code !== 'INTERNAL' ? { code } : {}),
+    ...(details ? { details } : {}),
   });
 };

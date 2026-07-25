@@ -1,5 +1,6 @@
 import crypto from 'crypto';
 import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
 
 const userSchema = new mongoose.Schema(
   {
@@ -12,7 +13,7 @@ const userSchema = new mongoose.Schema(
       trim: true,
       match: [/^\S+@\S+\.\S+$/, 'Invalid email format'],
     },
-    phone: { type: String, trim: true },
+    phone: { type: String, unique: true, sparse: true, trim: true },
     password: { type: String, required: true, minlength: 6, select: false },
     role: { type: String, enum: ['user', 'admin'], default: 'user' },
 
@@ -72,8 +73,11 @@ userSchema.methods.clearResetFields = function () {
   this.otpExpires = undefined;
 };
 
-userSchema.pre('save', function (next) {
+userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
+  if (this.password && !this.password.startsWith('$2')) {
+    this.password = await bcrypt.hash(this.password, 12);
+  }
   next();
 });
 

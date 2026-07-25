@@ -17,9 +17,11 @@ export default function Dashboard() {
   const [goal, setGoal] = useState(2000);
   const [water, setWater] = useState({ glasses: 0, goal: 8 });
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const load = useCallback(async () => {
     setLoading(true);
+    setError(null);
     try {
       const [s, g, w] = await Promise.all([
         mealApi.getDailySummary(),
@@ -29,6 +31,8 @@ export default function Dashboard() {
       setSummary(s.data);
       setGoal(g.data.goal.calorieGoal);
       setWater({ glasses: w.data.log?.glasses || 0, goal: w.data.goal || 8 });
+    } catch (e) {
+      setError(e.message || 'Failed to load dashboard');
     } finally {
       setLoading(false);
     }
@@ -36,7 +40,17 @@ export default function Dashboard() {
 
   useEffect(() => { load(); }, [load]);
 
-  if (loading || !summary) return <Spinner className="py-20" />;
+  if (loading || !summary) {
+    if (error) {
+      return (
+        <div className="py-20 text-center">
+          <p className="text-red-500 mb-4">{error}</p>
+          <button onClick={load} className="text-brand-600 hover:underline">Retry</button>
+        </div>
+      );
+    }
+    return <Spinner className="py-20" />;
+  }
 
   const t = summary.today;
   const calories = round(t.calories);

@@ -13,12 +13,16 @@ export default function Meals() {
   const [summary, setSummary] = useState(null);
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState(false);
+  const [error, setError] = useState(null);
 
   const load = async () => {
     setLoading(true);
+    setError(null);
     try {
       const res = await mealApi.getDailySummary();
       setSummary(res.data);
+    } catch (e) {
+      setError(e.message || 'Failed to load meals');
     } finally {
       setLoading(false);
     }
@@ -47,7 +51,17 @@ export default function Meals() {
     } finally { setBusy(false); }
   };
 
-  if (loading || !summary) return <Spinner className="py-20" />;
+  if (loading || !summary) {
+    if (error) {
+      return (
+        <div className="py-20 text-center">
+          <p className="text-red-500 mb-4">{error}</p>
+          <button onClick={load} className="text-brand-600 hover:underline">Retry</button>
+        </div>
+      );
+    }
+    return <Spinner className="py-20" />;
+  }
 
   const t = summary.today;
   const types = ['breakfast', 'lunch', 'dinner', 'snack'];

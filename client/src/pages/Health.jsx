@@ -54,6 +54,10 @@ export default function Health() {
     bmi < 18.5 ? 'blue' :
     bmi < 25 ? 'green' :
     bmi < 30 ? 'amber' : 'red';
+  const bmiColorClass = bmi === 0 ? 'text-gray-600' :
+    bmi < 18.5 ? 'text-blue-600' :
+    bmi < 25 ? 'text-green-600' :
+    bmi < 30 ? 'text-amber-600' : 'text-red-600';
 
   const tdee = (() => {
     const h = Number(form.heightCm), w = Number(form.weightKg), a = Number(form.age);
@@ -127,7 +131,7 @@ export default function Health() {
           <Card>
             <h2 className="font-semibold">BMI</h2>
             <p className="mt-2 text-3xl font-bold">{bmi ? bmi.toFixed(1) : '—'}</p>
-            <p className={`text-sm text-${bmiColor}-600`}>{bmiCat}</p>
+            <p className={`text-sm ${bmiColorClass}`}>{bmiCat}</p>
           </Card>
           <Card>
             <h2 className="font-semibold">TDEE</h2>
