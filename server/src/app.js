@@ -16,23 +16,7 @@ import exportRoutes from './routes/export.routes.js';
 const app = express();
 
 app.use(helmet());
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      const allowed = [
-        process.env.CLIENT_URL,
-        'http://localhost:5173',
-        'https://what-you-eat-tau.vercel.app',
-      ].filter(Boolean);
-      if (!origin || allowed.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(null, false);
-      }
-    },
-    credentials: true,
-  })
-);
+app.use(cors({ origin: true, credentials: true }));
 app.use(express.json({ limit: '2mb' }));
 app.use(express.urlencoded({ extended: true }));
 if (process.env.NODE_ENV !== 'test') app.use(morgan('dev'));
