@@ -13,22 +13,21 @@ import waterRoutes from './routes/water.routes.js';
 import recipeRoutes from './routes/recipe.routes.js';
 import exportRoutes from './routes/export.routes.js';
 
-const allowedOrigins = [
-  process.env.CLIENT_URL,
-  'http://localhost:5173',
-  'https://what-you-eat-tau.vercel.app',
-].filter(Boolean);
-
 const app = express();
 
 app.use(helmet());
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
+      const allowed = [
+        process.env.CLIENT_URL,
+        'http://localhost:5173',
+        'https://what-you-eat-tau.vercel.app',
+      ].filter(Boolean);
+      if (!origin || allowed.includes(origin)) {
         callback(null, true);
       } else {
-        callback(new Error('Not allowed by CORS'));
+        callback(null, false);
       }
     },
     credentials: true,
