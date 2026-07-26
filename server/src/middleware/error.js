@@ -29,6 +29,10 @@ export const errorHandler = (err, req, res, next) => {
     statusCode = 401;
     code = 'TOKEN_EXPIRED';
     message = 'Token has expired';
+  } else if (err?.message?.includes('secretOrPrivateKey must have a value')) {
+    statusCode = 500;
+    code = 'CONFIG_ERROR';
+    message = 'Server configuration error: JWT_SECRET is not set';
   } else if (err?.code === 11000) {
     statusCode = 409;
     code = 'DUPLICATE';

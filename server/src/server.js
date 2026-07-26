@@ -4,6 +4,11 @@ import app from './app.js';
 
 dotenv.config();
 
+if (!process.env.JWT_SECRET) {
+  console.error('[server] JWT_SECRET is not set — aborting');
+  process.exit(1);
+}
+
 const PORT = process.env.PORT || 5050;
 
 process.on('uncaughtException', (err) => {
