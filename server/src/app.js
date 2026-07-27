@@ -23,6 +23,17 @@ if (process.env.NODE_ENV !== 'test') app.use(morgan('dev'));
 
 app.get('/', (req, res) => res.json({ success: true, message: 'WhatYouEat API', docs: '/health' }));
 app.get('/health', (req, res) => res.json({ success: true, status: 'ok' }));
+app.get('/debug/env', (req, res) => {
+  res.json({
+    USDA_API_KEY_SET: Boolean(process.env.USDA_API_KEY),
+    USDA_API_KEY_LEN: (process.env.USDA_API_KEY || '').length,
+    NODE_ENV: process.env.NODE_ENV || '(not set)',
+    JWT_SECRET_SET: Boolean(process.env.JWT_SECRET),
+    MONGODB_URI_SET: Boolean(process.env.MONGODB_URI),
+    CLIENT_URL: process.env.CLIENT_URL || '(not set)',
+    CWD: process.cwd(),
+  });
+});
 
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
