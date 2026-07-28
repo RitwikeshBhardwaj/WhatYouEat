@@ -69,10 +69,10 @@ export default function Profile() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Profile</h1>
+      <h1 className="text-2xl font-bold text-white">Profile</h1>
 
       <Card>
-        <h2 className="font-semibold">Account & health details</h2>
+        <h2 className="font-semibold text-white">Account & health details</h2>
         <form onSubmit={saveProfile} className="mt-4 grid gap-4 sm:grid-cols-2">
           <Input name="name" label="Name" value={profile.name} onChange={onP} />
           <PhoneInput name="phone" label="Phone" value={profile.phone} onChange={(v) => setProfile({ ...profile, phone: v })} />
@@ -80,16 +80,16 @@ export default function Profile() {
           <Input name="weightKg" type="number" label="Weight (kg)" value={profile.weightKg} onChange={onP} />
           <Input name="age" type="number" label="Age" value={profile.age} onChange={onP} />
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Activity level</label>
+            <label className="block text-sm font-medium text-white/60 mb-1">Activity level</label>
             <select name="activityLevel" value={profile.activityLevel} onChange={onP}
-              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm">
+              className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white">
               {ACTIVITY.map((a) => <option key={a.v} value={a.v}>{a.label}</option>)}
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Gender</label>
+            <label className="block text-sm font-medium text-white/60 mb-1">Gender</label>
             <select name="gender" value={profile.gender} onChange={onP}
-              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm">
+              className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white">
               <option value="other">Other</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
@@ -102,7 +102,7 @@ export default function Profile() {
       </Card>
 
       <Card>
-        <h2 className="font-semibold">Daily goals</h2>
+        <h2 className="font-semibold text-white">Daily goals</h2>
         <form onSubmit={saveGoal} className="mt-4 grid gap-4 sm:grid-cols-2">
           <Input name="calorieGoal" type="number" label="Calorie goal (kcal/day)" value={goal.calorieGoal} onChange={onG} />
           <Input name="waterGoal" type="number" label="Water goal (glasses/day)" value={goal.waterGoal} onChange={onG} />
@@ -112,7 +112,7 @@ export default function Profile() {
         </form>
       </Card>
 
-      {msg && <p className="rounded-md bg-brand-50 p-3 text-sm text-brand-700">{msg}</p>}
+      {msg && <p className="rounded-md bg-brand-500/10 p-3 text-sm text-brand-400">{msg}</p>}
     </div>
   );
 }

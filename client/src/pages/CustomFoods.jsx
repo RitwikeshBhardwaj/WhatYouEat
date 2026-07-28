@@ -114,10 +114,10 @@ export default function CustomFoods() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Custom foods</h1>
+      <h1 className="text-2xl font-bold text-white">Custom foods</h1>
 
       <Card>
-        <h2 className="font-semibold">{editing ? 'Edit custom food' : 'Add custom food'}</h2>
+        <h2 className="font-semibold text-white">{editing ? 'Edit custom food' : 'Add custom food'}</h2>
         <form onSubmit={save} className="mt-4 grid gap-3 sm:grid-cols-2">
           <Input name="name" label="Name" required value={form.name} onChange={on} />
           <Input name="servingSize" label="Serving size" value={form.servingSize} onChange={on} />
@@ -126,12 +126,12 @@ export default function CustomFoods() {
           <Input name="carbs" type="number" label="Carbs (g)" value={form.carbs} onChange={on} />
           <Input name="fat" type="number" label="Fat (g)" value={form.fat} onChange={on} />
           <div className="sm:col-span-2">
-            <label className="mb-1 block text-sm font-medium text-slate-700">Default meal type</label>
+            <label className="mb-1 block text-sm font-medium text-white/60">Default meal type</label>
             <select
               name="mealType"
               value={form.mealType}
               onChange={on}
-              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
+              className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white"
             >
               {MEAL_TYPES.map((type) => (
                 <option key={type} value={type}>{type}</option>
@@ -145,17 +145,17 @@ export default function CustomFoods() {
         </form>
       </Card>
 
-      {msg && <p className="rounded-md bg-brand-50 p-3 text-sm text-brand-700">{msg}</p>}
+      {msg && <p className="rounded-md bg-brand-500/10 p-3 text-sm text-brand-400">{msg}</p>}
 
       <div className="grid gap-3">
-        {foods.length === 0 && <p className="text-sm text-slate-500">No custom foods yet.</p>}
+        {foods.length === 0 && <p className="text-sm text-white/40">No custom foods yet.</p>}
         {foods.map((f) => (
           <Card key={f._id} className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <p className="font-medium">{f.name}</p>
-              <p className="text-sm text-slate-500">
+              <p className="font-medium text-white">{f.name}</p>
+              <p className="text-sm text-white/50">
                 {f.nutrition.calories} kcal · P {f.nutrition.protein}g · C {f.nutrition.carbs}g · F {f.nutrition.fat}g
-                <span className="text-slate-400"> · {f.servingSize}</span>
+                <span className="text-white/30"> · {f.servingSize}</span>
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-2">
@@ -163,7 +163,7 @@ export default function CustomFoods() {
               <select
                 value={selectedMealTypes[f._id] || 'snack'}
                 onChange={(e) => updateMealType(f._id, e.target.value)}
-                className="rounded-lg border border-slate-300 px-2 py-1 text-sm"
+                className="rounded-lg border border-white/10 bg-white/5 px-2 py-1 text-sm text-white"
               >
                 {MEAL_TYPES.map((type) => (
                   <option key={type} value={type}>{type}</option>
@@ -171,7 +171,7 @@ export default function CustomFoods() {
               </select>
               <Button variant="ghost" onClick={() => logMeal(f)} disabled={busy}>+ Log</Button>
               <Button variant="secondary" onClick={() => edit(f)}>Edit</Button>
-              <button onClick={() => remove(f._id)} className="text-sm text-red-500 hover:underline">Delete</button>
+              <button onClick={() => remove(f._id)} className="text-sm text-red-400 hover:underline">Delete</button>
             </div>
           </Card>
         ))}

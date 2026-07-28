@@ -81,13 +81,13 @@ export default function ForgotPassword() {
   return (
     <div className="mx-auto max-w-md">
       <Card>
-        <h1 className="text-2xl font-bold">Forgot password</h1>
-        <p className="mt-1 text-sm text-slate-500">Reset via email link, SMS OTP, or recovery PIN.</p>
+        <h1 className="text-2xl font-bold text-white">Forgot password</h1>
+        <p className="mt-1 text-sm text-white/50">Reset via email link, SMS OTP, or recovery PIN.</p>
 
-        <div className="mt-5 flex rounded-lg bg-brand-50 p-1 text-sm">
-          <button onClick={() => setTab('email')} className={`flex-1 rounded-md py-1.5 ${tab === 'email' ? 'bg-white shadow text-brand-700' : 'text-slate-600'}`}>Email</button>
-          <button onClick={() => setTab('phone')} className={`flex-1 rounded-md py-1.5 ${tab === 'phone' ? 'bg-white shadow text-brand-700' : 'text-slate-600'}`}>Phone OTP</button>
-          <button onClick={() => setTab('pin')} className={`flex-1 rounded-md py-1.5 ${tab === 'pin' ? 'bg-white shadow text-brand-700' : 'text-slate-600'}`}>PIN</button>
+        <div className="mt-5 flex rounded-lg bg-white/5 p-1 text-sm">
+          <button onClick={() => setTab('email')} className={`flex-1 rounded-md py-1.5 ${tab === 'email' ? 'bg-white/10 text-brand-400' : 'text-white/50'}`}>Email</button>
+          <button onClick={() => setTab('phone')} className={`flex-1 rounded-md py-1.5 ${tab === 'phone' ? 'bg-white/10 text-brand-400' : 'text-white/50'}`}>Phone OTP</button>
+          <button onClick={() => setTab('pin')} className={`flex-1 rounded-md py-1.5 ${tab === 'pin' ? 'bg-white/10 text-brand-400' : 'text-white/50'}`}>PIN</button>
         </div>
 
         {tab === 'email' && (
@@ -127,11 +127,11 @@ export default function ForgotPassword() {
           </form>
         )}
 
-        {msg && <p className="mt-4 rounded-md bg-green-50 p-3 text-sm text-green-700">{msg}</p>}
-        {error && <p className="mt-4 rounded-md bg-red-50 p-3 text-sm text-red-700">{error}</p>}
+        {msg && <p className="mt-4 rounded-md bg-green-500/10 p-3 text-sm text-green-400">{msg}</p>}
+        {error && <p className="mt-4 rounded-md bg-red-500/10 p-3 text-sm text-red-400">{error}</p>}
 
-        <p className="mt-4 text-sm text-slate-600">
-          Remembered it? <Link to="/login" className="text-brand-700 font-medium hover:underline">Log in</Link>
+        <p className="mt-4 text-sm text-white/50">
+          Remembered it? <Link to="/login" className="text-brand-400 font-medium hover:underline">Log in</Link>
         </p>
       </Card>
     </div>

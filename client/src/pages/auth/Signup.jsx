@@ -34,17 +34,17 @@ export default function Signup() {
 
   return (
     <div className="mx-auto max-w-md">
-      <div className="rounded-2xl bg-white p-8 shadow-lg shadow-brand-500/10 border border-brand-200">
-        <h1 className="text-2xl font-extrabold tracking-tight text-black">Create your account 🌱</h1>
-        <p className="mt-1 text-sm text-slate-500">Sign up with email or phone — just one is enough.</p>
+      <div className="rounded-2xl bg-surface-900/60 p-8 shadow-lg shadow-brand-500/10 border border-white/5 backdrop-blur-sm">
+        <h1 className="text-2xl font-extrabold tracking-tight text-white">Create your account</h1>
+        <p className="mt-1 text-sm text-white/50">Sign up with email or phone — just one is enough.</p>
 
-        <div className="mt-5 flex rounded-xl bg-brand-50 p-1 text-sm">
+        <div className="mt-5 flex rounded-xl bg-white/5 p-1 text-sm">
           <button type="button" onClick={() => setMethod('email')}
-            className={`flex-1 rounded-lg py-1.5 font-medium transition ${method === 'email' ? 'bg-white text-brand-700 shadow' : 'text-slate-600'}`}>
+            className={`flex-1 rounded-lg py-1.5 font-medium transition ${method === 'email' ? 'bg-white/10 text-brand-400 shadow' : 'text-white/50'}`}>
             ✉️ Email
           </button>
           <button type="button" onClick={() => setMethod('phone')}
-            className={`flex-1 rounded-lg py-1.5 font-medium transition ${method === 'phone' ? 'bg-white text-brand-700 shadow' : 'text-slate-600'}`}>
+            className={`flex-1 rounded-lg py-1.5 font-medium transition ${method === 'phone' ? 'bg-white/10 text-brand-400 shadow' : 'text-white/50'}`}>
             📱 Phone
           </button>
         </div>
@@ -58,17 +58,17 @@ export default function Signup() {
           )}
           <Input id="password" name="password" type="password" label="Password (min 6)" required value={form.password} onChange={onChange} />
           {method === 'email' && (
-            <p className="text-xs text-slate-500">A recovery PIN will be emailed to you for password resets.</p>
+            <p className="text-xs text-white/40">A recovery PIN will be emailed to you for password resets.</p>
           )}
-          {error && <p className="text-sm text-red-600">{error}</p>}
+          {error && <p className="text-sm text-red-400">{error}</p>}
           <Button type="submit" className="w-full" disabled={loading}>
             {loading ? 'Creating…' : 'Sign up'}
           </Button>
         </form>
 
-        <p className="mt-4 text-sm text-slate-600">
+        <p className="mt-4 text-sm text-white/50">
           Already have an account?{' '}
-          <Link to="/login" className="text-brand-700 font-medium hover:underline">Log in</Link>
+          <Link to="/login" className="text-brand-400 font-medium hover:underline">Log in</Link>
         </p>
       </div>
     </div>

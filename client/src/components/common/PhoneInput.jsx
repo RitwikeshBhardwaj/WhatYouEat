@@ -43,7 +43,7 @@ export default function PhoneInput({ value = '', onChange, id, label, placeholde
   return (
     <div className="w-full">
       {label && (
-        <label htmlFor={id} className="block text-sm font-medium text-slate-700 mb-1">
+        <label htmlFor={id} className="block text-sm font-medium text-white/60 mb-1">
           {label}
         </label>
       )}
@@ -52,7 +52,7 @@ export default function PhoneInput({ value = '', onChange, id, label, placeholde
           aria-label="Country code"
           value={code}
           onChange={(e) => emit(e.target.value, rest)}
-          className="rounded-lg border border-slate-300 bg-white px-2 py-2 text-sm shadow-sm outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-100"
+          className="rounded-lg border border-white/10 bg-white/5 px-2 py-2 text-sm text-white shadow-sm outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
         >
           {COUNTRIES.map((c) => (
             <option key={c.code} value={c.code}>{c.label}</option>
@@ -66,7 +66,7 @@ export default function PhoneInput({ value = '', onChange, id, label, placeholde
           value={rest}
           onChange={(e) => emit(code, e.target.value)}
           className={cn(
-            'w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm shadow-sm outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-100',
+            'w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white shadow-sm outline-none transition placeholder:text-white/30 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20',
             className
           )}
         />

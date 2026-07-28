@@ -1,12 +1,12 @@
 import { cn } from '../../utils';
 
 const COLORS = {
-  green: 'bg-green-100 text-green-700',
-  red: 'bg-red-100 text-red-700',
-  amber: 'bg-amber-100 text-amber-700',
-  blue: 'bg-blue-100 text-blue-700',
-  gray: 'bg-slate-100 text-slate-700',
-  brand: 'bg-brand-100 text-brand-700',
+  green: 'bg-green-500/15 text-green-400',
+  red: 'bg-red-500/15 text-red-400',
+  amber: 'bg-amber-500/15 text-amber-400',
+  blue: 'bg-blue-500/15 text-blue-400',
+  gray: 'bg-white/10 text-white/60',
+  brand: 'bg-brand-500/15 text-brand-400',
 };
 
 export default function Badge({ color = 'gray', children, className }) {

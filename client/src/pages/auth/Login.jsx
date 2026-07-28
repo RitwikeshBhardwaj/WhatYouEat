@@ -30,28 +30,28 @@ export default function Login() {
 
   return (
     <div className="mx-auto max-w-md">
-      <div className="rounded-2xl bg-white p-8 shadow-lg shadow-brand-500/10 border border-brand-200">
-        <h1 className="text-2xl font-extrabold tracking-tight text-black">Welcome back 👋</h1>
-        <p className="mt-1 text-sm text-slate-500">Log in to track your meals.</p>
+      <div className="rounded-2xl bg-surface-900/60 p-8 shadow-lg shadow-brand-500/10 border border-white/5 backdrop-blur-sm">
+        <h1 className="text-2xl font-extrabold tracking-tight text-white">Welcome back</h1>
+        <p className="mt-1 text-sm text-white/50">Log in to track your meals.</p>
 
         <form onSubmit={submit} className="mt-6 space-y-4">
           <Input id="email" name="email" label="Email or phone" required
             value={form.email} onChange={onChange} placeholder="you@example.com or +91XXXXXXXXXX" />
           <Input id="password" name="password" type="password" label="Password" required
             value={form.password} onChange={onChange} placeholder="••••••••" />
-          {error && <p className="text-sm text-red-600">{error}</p>}
+          {error && <p className="text-sm text-red-400">{error}</p>}
           <Button type="submit" className="w-full" disabled={loading}>
             {loading ? 'Logging in…' : 'Log in'}
           </Button>
         </form>
 
-        <div className="mt-4 flex flex-col gap-2 text-sm text-slate-600">
-          <RouterLink to="/forgot-password" className="text-brand-700 font-medium hover:underline">
+        <div className="mt-4 flex flex-col gap-2 text-sm text-white/50">
+          <RouterLink to="/forgot-password" className="text-brand-400 font-medium hover:underline">
             Forgot password?
           </RouterLink>
           <p>
             Don't have an account?{' '}
-            <Link to="/signup" className="text-brand-700 font-medium hover:underline">Sign up</Link>
+            <Link to="/signup" className="text-brand-400 font-medium hover:underline">Sign up</Link>
           </p>
         </div>
       </div>

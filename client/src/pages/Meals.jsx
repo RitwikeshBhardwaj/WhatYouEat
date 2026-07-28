@@ -55,8 +55,8 @@ export default function Meals() {
     if (error) {
       return (
         <div className="py-20 text-center">
-          <p className="text-red-500 mb-4">{error}</p>
-          <button onClick={load} className="text-brand-600 hover:underline">Retry</button>
+          <p className="text-red-400 mb-4">{error}</p>
+          <button onClick={load} className="text-brand-400 hover:underline">Retry</button>
         </div>
       );
     }
@@ -69,48 +69,48 @@ export default function Meals() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Today's meals</h1>
+        <h1 className="text-2xl font-bold text-white">Today's meals</h1>
         <Button variant="secondary" onClick={downloadPdf} disabled={busy}>📄 Export week (PDF)</Button>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-4">
-        <Card>
-          <p className="text-sm text-slate-500">Calories</p>
-          <p className="text-2xl font-bold">{Math.round(t.calories)}</p>
-        </Card>
-        <Card>
-          <p className="text-sm text-slate-500">Protein</p>
-          <p className="text-2xl font-bold">{Math.round(t.protein)}g</p>
-        </Card>
-        <Card>
-          <p className="text-sm text-slate-500">Carbs</p>
-          <p className="text-2xl font-bold">{Math.round(t.carbs)}g</p>
-        </Card>
-        <Card>
-          <p className="text-sm text-slate-500">Fat</p>
-          <p className="text-2xl font-bold">{Math.round(t.fat)}g</p>
-        </Card>
+          <Card>
+            <p className="text-sm text-white/50">Calories</p>
+            <p className="text-2xl font-bold text-white">{Math.round(t.calories)}</p>
+          </Card>
+          <Card>
+            <p className="text-sm text-white/50">Protein</p>
+            <p className="text-2xl font-bold text-white">{Math.round(t.protein)}g</p>
+          </Card>
+          <Card>
+            <p className="text-sm text-white/50">Carbs</p>
+            <p className="text-2xl font-bold text-white">{Math.round(t.carbs)}g</p>
+          </Card>
+          <Card>
+            <p className="text-sm text-white/50">Fat</p>
+            <p className="text-2xl font-bold text-white">{Math.round(t.fat)}g</p>
+          </Card>
       </div>
 
       {types.map((mt) => (
         <Card key={mt}>
           <div className="flex items-center gap-2">
             <Badge color={MEAL_COLORS[mt]}>{mt}</Badge>
-            <span className="text-sm text-slate-500">{t.byType[mt].length} item(s)</span>
+            <span className="text-sm text-white/50">{t.byType[mt].length} item(s)</span>
           </div>
-          {t.byType[mt].length === 0 ? (
-            <p className="mt-3 text-sm text-slate-400">Nothing logged.</p>
+              {t.byType[mt].length === 0 ? (
+            <p className="mt-3 text-sm text-white/30">Nothing logged.</p>
           ) : (
-            <ul className="mt-3 divide-y divide-slate-100">
+            <ul className="mt-3 divide-y divide-white/5">
               {t.byType[mt].map((m) => (
                 <li key={m._id} className="flex items-center justify-between py-2">
                   <div>
-                    <p className="text-sm font-medium">{m.label}</p>
-                    <p className="text-xs text-slate-500">
+                    <p className="text-sm font-medium text-white">{m.label}</p>
+                    <p className="text-xs text-white/50">
                       {m.nutrition.calories} kcal · P {m.nutrition.protein}g · C {m.nutrition.carbs}g · F {m.nutrition.fat}g · ×{m.portion}
                     </p>
                   </div>
-                  <button onClick={() => remove(m._id)} disabled={busy} className="text-xs text-red-500 hover:underline">Remove</button>
+                  <button onClick={() => remove(m._id)} disabled={busy} className="text-xs text-red-400 hover:underline">Remove</button>
                 </li>
               ))}
             </ul>
@@ -119,12 +119,12 @@ export default function Meals() {
       ))}
 
       <Card>
-        <h2 className="font-semibold">Last 7 days</h2>
-        <ul className="mt-3 divide-y divide-slate-100">
+        <h2 className="font-semibold text-white">Last 7 days</h2>
+        <ul className="mt-3 divide-y divide-white/5">
           {summary.week.map((d) => (
             <li key={d.date} className="flex items-center justify-between py-2 text-sm">
-              <span>{prettyDate(d.date)}</span>
-              <span className="text-slate-500">
+              <span className="text-white/70">{prettyDate(d.date)}</span>
+              <span className="text-white/50">
                 {d.calories} kcal · {d.count} item(s)
                 {d.count > 0 ? ' ✅' : ' —'}
               </span>

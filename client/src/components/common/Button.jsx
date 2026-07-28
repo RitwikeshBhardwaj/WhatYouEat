@@ -2,9 +2,9 @@ import { cn } from '../../utils';
 
 const VARIANTS = {
   primary: 'bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700 text-white shadow-sm shadow-brand-500/30',
-  secondary: 'bg-white hover:bg-brand-50 text-black border border-brand-200',
+  secondary: 'bg-white/5 hover:bg-white/10 text-white border border-white/10',
   danger: 'bg-accent-500 hover:bg-accent-600 text-white',
-  ghost: 'bg-transparent hover:bg-brand-100 text-black',
+  ghost: 'bg-transparent hover:bg-white/5 text-white/70 hover:text-white',
 };
 
 export default function Button({ variant = 'primary', className, children, ...props }) {

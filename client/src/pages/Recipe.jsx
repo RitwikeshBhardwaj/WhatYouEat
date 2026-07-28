@@ -27,7 +27,7 @@ export default function Recipe() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Recipe analyzer</h1>
+      <h1 className="text-2xl font-bold text-white">Recipe analyzer</h1>
 
       <Card>
         <form onSubmit={analyze} className="space-y-3">
@@ -36,10 +36,10 @@ export default function Recipe() {
             onChange={(e) => setInput(e.target.value)}
             rows={5}
             placeholder={"2 cups flour\n1 cup sugar\n3 eggs\n1/2 cup butter"}
-            className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
+            className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-white/30"
           />
           <div className="flex items-center gap-2">
-            <label htmlFor="servings" className="text-sm text-slate-600">Servings</label>
+            <label htmlFor="servings" className="text-sm text-white/60">Servings</label>
             <input
               id="servings"
               type="number"
@@ -47,14 +47,14 @@ export default function Recipe() {
               max="20"
               value={servings}
               onChange={(e) => setServings(Number(e.target.value) || 1)}
-              className="w-24 rounded-lg border border-slate-300 px-3 py-2 text-sm"
+              className="w-24 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white"
             />
           </div>
           <Button type="submit" disabled={loading}>{loading ? 'Analyzing…' : 'Analyze recipe'}</Button>
         </form>
       </Card>
 
-      {error && <p className="rounded-md bg-red-50 p-3 text-sm text-red-700">{error}</p>}
+      {error && <p className="rounded-md bg-red-500/10 p-3 text-sm text-red-400">{error}</p>}
       {loading && <Spinner className="py-10" />}
 
       {data && !loading && (
@@ -62,9 +62,9 @@ export default function Recipe() {
           <Card>
             <div className="flex items-start justify-between gap-4">
               <div>
-                <h2 className="text-lg font-semibold">{data.label}</h2>
-                {data.source && <p className="text-sm text-slate-500">Source: {data.source}</p>}
-                {data.yield && <p className="text-sm text-slate-500">Serves {data.yield}</p>}
+                <h2 className="text-lg font-semibold text-white">{data.label}</h2>
+                {data.source && <p className="text-sm text-white/50">Source: {data.source}</p>}
+                {data.yield && <p className="text-sm text-white/50">Serves {data.yield}</p>}
               </div>
               {data.image && <img src={data.image} alt={data.label} className="h-20 w-20 rounded-lg object-cover" />}
             </div>
@@ -77,8 +77,8 @@ export default function Recipe() {
 
           <div className="grid gap-4 sm:grid-cols-2">
             <Card>
-              <h3 className="font-semibold">Total nutrition</h3>
-              <ul className="mt-2 space-y-1 text-sm">
+              <h3 className="font-semibold text-white">Total nutrition</h3>
+              <ul className="mt-2 space-y-1 text-sm text-white/70">
                 <li>Calories: {data.totalNutrition.calories}</li>
                 <li>Protein: {data.totalNutrition.protein}g</li>
                 <li>Carbs: {data.totalNutrition.carbs}g</li>
@@ -88,8 +88,8 @@ export default function Recipe() {
               </ul>
             </Card>
             <Card>
-              <h3 className="font-semibold">Per serving</h3>
-              <ul className="mt-2 space-y-1 text-sm">
+              <h3 className="font-semibold text-white">Per serving</h3>
+              <ul className="mt-2 space-y-1 text-sm text-white/70">
                 <li>Calories: {data.perServing.calories}</li>
                 <li>Protein: {data.perServing.protein}g</li>
                 <li>Carbs: {data.perServing.carbs}g</li>
@@ -100,19 +100,19 @@ export default function Recipe() {
 
           {data.ingredients?.length > 0 && (
             <Card>
-              <h3 className="font-semibold">Ingredients</h3>
+              <h3 className="font-semibold text-white">Ingredients</h3>
               <ul className="mt-2 space-y-1 text-sm">
                 {data.ingredients.map((ing, i) => (
-                  <li key={i} className="text-slate-700">
+                  <li key={i} className="text-white/70">
                     {ing.text || `${ing.quantity || ''} ${ing.food || ''}`}
-                    {ing.weight ? <span className="text-slate-400"> ({Math.round(ing.weight)}g)</span> : null}
+                    {ing.weight ? <span className="text-white/40"> ({Math.round(ing.weight)}g)</span> : null}
                   </li>
                 ))}
               </ul>
             </Card>
           )}
 
-          {data.note && <p className="rounded-md bg-amber-50 p-3 text-sm text-amber-700">{data.note}</p>}
+          {data.note && <p className="rounded-md bg-amber-500/10 p-3 text-sm text-amber-400">{data.note}</p>}
         </div>
       )}
     </div>

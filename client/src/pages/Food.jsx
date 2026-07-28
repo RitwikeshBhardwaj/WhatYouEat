@@ -68,7 +68,7 @@ export default function Food() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Food search</h1>
+      <h1 className="text-2xl font-bold text-white">Food search</h1>
 
       <form onSubmit={search} className="flex gap-2">
         <div className="flex-1">
@@ -77,24 +77,24 @@ export default function Food() {
         <Button type="submit" disabled={loading}>{loading ? 'Searching…' : 'Search'}</Button>
       </form>
 
-      {error && <p className="rounded-md bg-red-50 p-3 text-sm text-red-700">{error}</p>}
-      {msg && <p className="rounded-md bg-green-50 p-3 text-sm text-green-700">{msg}</p>}
+      {error && <p className="rounded-md bg-red-500/10 p-3 text-sm text-red-400">{error}</p>}
+      {msg && <p className="rounded-md bg-green-500/10 p-3 text-sm text-green-400">{msg}</p>}
       {loading && !results && <Spinner className="py-10" />}
 
       {adding && (
         <Card>
-          <h2 className="font-semibold">Log: {adding.label}</h2>
-          <p className="text-sm text-slate-500">Per serving: {adding.nutrition.calories} kcal · P {adding.nutrition.protein}g · C {adding.nutrition.carbs}g · F {adding.nutrition.fat}g</p>
+          <h2 className="font-semibold text-white">Log: {adding.label}</h2>
+          <p className="text-sm text-white/50">Per serving: {adding.nutrition.calories} kcal · P {adding.nutrition.protein}g · C {adding.nutrition.carbs}g · F {adding.nutrition.fat}g</p>
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Meal type</label>
-              <select value={mealType} onChange={(e) => setMealType(e.target.value)} className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm">
+              <label className="block text-sm font-medium text-white/60 mb-1">Meal type</label>
+              <select value={mealType} onChange={(e) => setMealType(e.target.value)} className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white">
                 {MEAL_TYPES.map((m) => <option key={m} value={m}>{m}</option>)}
               </select>
             </div>
             <Input type="number" step="0.1" min="0.1" label="Portion (servings)" value={portion} onChange={(e) => setPortion(e.target.value)} />
           </div>
-          <div className="mt-3 rounded-lg bg-slate-50 p-3 text-sm">
+          <div className="mt-3 rounded-lg bg-white/5 p-3 text-sm text-white/70">
             Totals: {Math.round(adding.nutrition.calories * portion)} kcal · P {Math.round(adding.nutrition.protein * portion * 10) / 10}g · C {Math.round(adding.nutrition.carbs * portion * 10) / 10}g · F {Math.round(adding.nutrition.fat * portion * 10) / 10}g
           </div>
           <div className="mt-3 flex gap-2">
@@ -106,12 +106,12 @@ export default function Food() {
 
       {results && !adding && (
         <div className="grid gap-3">
-          {results.items.length === 0 && <p className="text-sm text-slate-500">No results.</p>}
+          {results.items.length === 0 && <p className="text-sm text-white/40">No results.</p>}
           {results.items.map((item) => (
             <Card key={item.foodId || item.label} className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <p className="font-medium">{item.label}</p>
-                <p className="text-sm text-slate-500">
+                <p className="font-medium text-white">{item.label}</p>
+                <p className="text-sm text-white/50">
                   {item.nutrition.calories} kcal · P {item.nutrition.protein}g · C {item.nutrition.carbs}g · F {item.nutrition.fat}g
                   {item.category ? ` · ${item.category}` : ''}
                 </p>

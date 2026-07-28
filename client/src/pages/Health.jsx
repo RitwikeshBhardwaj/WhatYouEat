@@ -54,10 +54,10 @@ export default function Health() {
     bmi < 18.5 ? 'blue' :
     bmi < 25 ? 'green' :
     bmi < 30 ? 'amber' : 'red';
-  const bmiColorClass = bmi === 0 ? 'text-gray-600' :
-    bmi < 18.5 ? 'text-blue-600' :
-    bmi < 25 ? 'text-green-600' :
-    bmi < 30 ? 'text-amber-600' : 'text-red-600';
+  const bmiColorClass = bmi === 0 ? 'text-white/40' :
+    bmi < 18.5 ? 'text-blue-400' :
+    bmi < 25 ? 'text-green-400' :
+    bmi < 30 ? 'text-amber-400' : 'text-red-400';
 
   const tdee = (() => {
     const h = Number(form.heightCm), w = Number(form.weightKg), a = Number(form.age);
@@ -96,47 +96,47 @@ export default function Health() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Health insights</h1>
+      <h1 className="text-2xl font-bold text-white">Health insights</h1>
 
       <div className="grid gap-4 lg:grid-cols-2">
-        <Card>
-          <h2 className="font-semibold">Your metrics</h2>
-          <div className="mt-4 grid gap-3 sm:grid-cols-2">
-            <Input name="heightCm" type="number" label="Height (cm)" value={form.heightCm} onChange={onForm} />
-            <Input name="weightKg" type="number" label="Weight (kg)" value={form.weightKg} onChange={onForm} />
-            <Input name="age" type="number" label="Age" value={form.age} onChange={onForm} />
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Activity level</label>
-              <select name="activityLevel" value={form.activityLevel} onChange={onForm} className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm">
-                <option value="sedentary">Sedentary</option>
-                <option value="light">Lightly active</option>
-                <option value="moderate">Moderately active</option>
-                <option value="active">Active</option>
-                <option value="very_active">Very active</option>
-              </select>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Gender</label>
-              <select name="gender" value={form.gender} onChange={onForm} className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm">
-                <option value="other">Other</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-              </select>
-            </div>
+          <Card>
+            <h2 className="font-semibold text-white">Your metrics</h2>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2">
+              <Input name="heightCm" type="number" label="Height (cm)" value={form.heightCm} onChange={onForm} />
+              <Input name="weightKg" type="number" label="Weight (kg)" value={form.weightKg} onChange={onForm} />
+              <Input name="age" type="number" label="Age" value={form.age} onChange={onForm} />
+              <div>
+                <label className="block text-sm font-medium text-white/60 mb-1">Activity level</label>
+                <select name="activityLevel" value={form.activityLevel} onChange={onForm} className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white">
+                  <option value="sedentary">Sedentary</option>
+                  <option value="light">Lightly active</option>
+                  <option value="moderate">Moderately active</option>
+                  <option value="active">Active</option>
+                  <option value="very_active">Very active</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-white/60 mb-1">Gender</label>
+                <select name="gender" value={form.gender} onChange={onForm} className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white">
+                  <option value="other">Other</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </div>
           </div>
           <Button className="mt-4" onClick={saveProfile} disabled={busy}>Save metrics</Button>
         </Card>
 
         <div className="space-y-4">
           <Card>
-            <h2 className="font-semibold">BMI</h2>
-            <p className="mt-2 text-3xl font-bold">{bmi ? bmi.toFixed(1) : '—'}</p>
+            <h2 className="font-semibold text-white">BMI</h2>
+            <p className="mt-2 text-3xl font-bold text-white">{bmi ? bmi.toFixed(1) : '—'}</p>
             <p className={`text-sm ${bmiColorClass}`}>{bmiCat}</p>
           </Card>
           <Card>
-            <h2 className="font-semibold">TDEE</h2>
-            <p className="mt-2 text-3xl font-bold">{tdee ? tdee : '—'} <span className="text-base font-normal text-slate-500">kcal/day</span></p>
-            <p className="text-sm text-slate-500">
+            <h2 className="font-semibold text-white">TDEE</h2>
+            <p className="mt-2 text-3xl font-bold text-white">{tdee ? tdee : '—'} <span className="text-base font-normal text-white/40">kcal/day</span></p>
+            <p className="text-sm text-white/50">
               {tdee ? `Maintenance ≈ ${tdee} kcal · For weight loss aim ~${tdee - 500} kcal/day` : 'Fill metrics to calculate'}
             </p>
           </Card>
@@ -144,11 +144,11 @@ export default function Health() {
       </div>
 
       <Card>
-        <h2 className="font-semibold">Water tracker</h2>
+        <h2 className="font-semibold text-white">Water tracker</h2>
         <div className="mt-3 flex items-center justify-between">
           <div>
-            <p className="text-3xl font-bold">{water.glasses} 💧</p>
-            <p className="text-sm text-slate-500">/ {water.goal} glasses today</p>
+            <p className="text-3xl font-bold text-white">{water.glasses} 💧</p>
+            <p className="text-sm text-white/50">/ {water.goal} glasses today</p>
           </div>
           <div className="flex gap-2">
             <Button variant="secondary" onClick={() => addGlass(-1)} disabled={busy || water.glasses <= 0}>−1</Button>
@@ -159,8 +159,8 @@ export default function Health() {
       </Card>
 
       {waterWeek.length > 0 && (
-        <Card>
-          <h2 className="font-semibold">Water — last 7 days</h2>
+          <Card>
+            <h2 className="font-semibold text-white">Water — last 7 days</h2>
           <div className="mt-4 h-56">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={waterWeek.map((d) => ({ date: prettyDate(d.date), glasses: d.glasses }))}>
