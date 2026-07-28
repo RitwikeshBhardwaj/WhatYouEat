@@ -146,10 +146,10 @@ export default function Dashboard() {
       <div className="grid gap-4 lg:grid-cols-2">
         <Card>
           <h2 className="font-semibold text-white">Macro breakdown</h2>
-          <div className="mt-4 h-64">
+          <div className="mt-4" style={{ height: '256px' }}>
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
-                <Pie data={macroData} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={50} outerRadius={80} paddingAngle={2}>
+                <Pie data={macroData} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={50} outerRadius={80} paddingAngle={2} isAnimationActive={false}>
                   {macroData.map((d) => <Cell key={d.name} fill={MACRO_COLORS[d.name]} />)}
                 </Pie>
                 <Tooltip contentStyle={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px' }} labelStyle={{ color: '#fff' }} itemStyle={{ color: '#fff' }} />
