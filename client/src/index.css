@@ -2,8 +2,102 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes splat {
+  0% { transform: scale(0); opacity: 0.5; }
+  100% { transform: scale(1); opacity: 0; }
+}
+
+@keyframes splat-dot {
+  0% { transform: scale(0); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+@keyframes melon-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(4deg); }
+}
+
+@keyframes melon-shake {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  15% { transform: translate(-4px, 3px) rotate(-6deg); }
+  30% { transform: translate(4px, -2px) rotate(6deg); }
+  45% { transform: translate(-3px, 4px) rotate(-4deg); }
+  60% { transform: translate(3px, -3px) rotate(4deg); }
+  80% { transform: translate(-2px, 2px) rotate(-2deg); }
+  100% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+}
+
+@keyframes juice-drip {
+  0% { transform: scaleY(0); opacity: 0.6; }
+  30% { opacity: 0.8; }
+  100% { transform: scaleY(1); opacity: 0; }
+}
+
+:root {
+  --surface-50: 240 253 244;
+  --surface-100: 220 252 231;
+  --surface-200: 187 247 208;
+  --surface-800: 12 40 20;
+  --surface-850: 8 30 15;
+  --surface-900: 5 20 10;
+  --surface-950: 2 8 4;
+  --on-surface: 255 255 255;
+}
+
+.dark {
+  --surface-50: 240 253 244;
+  --surface-100: 220 252 231;
+  --surface-200: 187 247 208;
+  --surface-800: 12 40 20;
+  --surface-850: 8 30 15;
+  --surface-900: 5 20 10;
+  --surface-950: 2 8 4;
+  --on-surface: 255 255 255;
+}
+
 @layer base {
   body {
-    @apply bg-brand-50 text-black antialiased;
+    @apply antialiased transition-colors duration-300;
+    background-color: rgb(var(--surface-950));
+    color: rgb(var(--on-surface));
+  }
+
+  *::-webkit-scrollbar {
+    width: 6px;
+  }
+  *::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  *::-webkit-scrollbar-thumb {
+    @apply rounded-full;
+    background-color: rgb(var(--on-surface) / 0.1);
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply border backdrop-blur-xl;
+    border-color: rgb(var(--on-surface) / 0.16);
+    background-color: rgb(var(--on-surface) / 0.16);
+  }
+
+  .glass-strong {
+    @apply border backdrop-blur-xl;
+    border-color: rgb(var(--on-surface) / 0.16);
+    background-color: rgb(var(--surface-900) / 0.92);
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(to bottom right, rgb(var(--on-surface)), rgb(var(--on-surface) / 0.9), rgb(var(--on-surface) / 0.6));
+  }
+
+  .text-gradient-brand {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(to right, rgb(74 222 128), rgb(34 197 94), rgb(34 197 94));
+  }
+
+  .glow-brand {
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.15);
   }
 }
