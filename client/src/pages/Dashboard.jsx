@@ -152,7 +152,7 @@ export default function Dashboard() {
                 <Pie data={macroData} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={50} outerRadius={80} paddingAngle={2}>
                   {macroData.map((d) => <Cell key={d.name} fill={MACRO_COLORS[d.name]} />)}
                 </Pie>
-                <Tooltip contentStyle={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#fff' }} />
+                <Tooltip contentStyle={{ background: '#1a1a2e', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px' }} labelStyle={{ color: '#fff' }} itemStyle={{ color: '#fff' }} />
               </PieChart>
             </ResponsiveContainer>
           </div>
